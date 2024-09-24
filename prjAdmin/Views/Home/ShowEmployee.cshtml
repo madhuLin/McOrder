@@ -1,0 +1,159 @@
+﻿@*@using PagedList
+    @using PagedList.Mvc
+    @model IPagedList<prjAdmin.Models.bEmployee>
+    <link href="~/Content/PagedList.css" rel="stylesheet" />*@
+@model IEnumerable<prjAdmin.Models.bEmployee>
+
+@*<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">*@
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+@{
+    ViewBag.Title = "員工列表";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*Begin Page Content*@
+<div class="container-fluid">
+
+    <h1 class="h3 mb-2 text-gray-800">管理人員</h1>
+
+
+    @*DataTales Example*@
+    <div class="card shadow mb-4">
+        @*<div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">管理人員列表</h6>
+            </div>*@
+        <div class="card-header py-3" style="display: flex; align-items: center;">
+            <h6 class="m-0 font-weight-bold text-primary" style="flex: 1;">管理人員列表</h6>
+            <a href=@Url.Action("Create") class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">新增員工</span>
+            </a>
+        </div>
+
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.bUserId)</th>
+                            <th>@Html.DisplayNameFor(model => model.bName)</th>
+                            <th>@Html.DisplayNameFor(model => model.bEmail)</th>
+                            <th>@Html.DisplayNameFor(model => model.bUpdateTime)</th>
+                            <th>    操作   </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="bUserId">@item.bUserId</td>
+                                <td>@item.bName</td>
+                                <td>@item.bEmail</td>
+                                <td>@item.bUpdateTime</td>
+                                <td>
+                                    <a href="@Url.Action("Edit")?bUserId=@item.bUserId" class="btn btn-info btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">編輯</span>
+                                    </a>
+
+                                    <a href="@Url.Action("Delete")?bUserID=@item.bUserId" class="btn btn-danger btn-icon-split" name="bDelete" onclick="return confirm('確定要刪除 @item.bUserId 嗎?');">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                        <span class="text">刪除</span>
+                                    </a>
+
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+                <script>
+                    $(document).ready(function () {
+                        var apiurl = location.href.substring(0, 23) + "Home/";
+
+                        $('#dataTable').DataTable({
+                            deferRender: true,
+                            language: {
+                                url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/zh-HANT.json',
+                            },
+                        });
+
+                        //$(".Edit").click(function () {
+                        //    var bUserId = $(this).siblings(".bUserId").text();
+                        //    alert(apiurl);
+                        //    $.ajax({
+                        //        url: apiurl + "Edit?bUserId=" + encodeURIComponent(bUserId),
+                        //        type: "get",
+                        //    });
+                        //})
+
+                    });
+                </script>
+
+
+
+                @*@Html.PagedListPager(Model, Page => Url.Action("Table", new { Page }))*@
+
+                @*<script src="~/Scripts/myJs/table.js"></script>*@
+                @*<script>
+                        $(function () {
+                            var apiurl = location.href.substring(0, 23) + "Home/Table";
+
+                            $("[name='bDelete']").on("click", fnDelete);
+
+                            var id = $(".bUserId").text();
+                            alert(id)
+
+                            function fnDelete() {
+
+                                var r = confirm("確定要刪除嗎?");
+                                if (r) {
+                                    var id = $(".bUserId").val();
+                                    alert(apiurl + "?id" + encodeURIComponent(id));
+                                    $.ajax({
+                                        url: apiurl + "?id" + encodeURIComponent(id),
+                                        type: "DELETE",
+                                        success: function (result) {
+                                            if (result != 0) {
+                                                alert(result);
+                                                alert("刪除成功");
+                                                location.reload();
+                                            }
+                                            else {
+                                                alert("刪除失敗");
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    </script>*@
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*<script src="~/Scripts/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Scripts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Scripts/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/Scripts/js/demo/"></script>*@
+
+

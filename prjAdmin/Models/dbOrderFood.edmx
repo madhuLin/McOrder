@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbOrderFoodModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bEmployee">
+          <Key>
+            <PropertyRef Name="bId" />
+          </Key>
+          <Property Name="bId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bUserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bPwd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bSex" Type="int" Nullable="false" />
+          <Property Name="bEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bStatus" Type="int" Nullable="false" />
+          <Property Name="bCreateTime" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="bUpdateTime" Type="datetime2" Precision="0" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime2" Precision="0" />
+          <Property Name="UpdateTime" Type="datetime2" Precision="0" />
+        </EntityType>
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Img" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime2" Precision="0" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="State" Type="int" />
+          <Property Name="UpdateTime" Type="datetime2" Precision="0" />
+        </EntityType>
+        <EntityType Name="tMember">
+          <Key>
+            <PropertyRef Name="tId" />
+          </Key>
+          <Property Name="tId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tUserId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tPwd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bCreateTime" Type="datetime2" Precision="0" />
+          <Property Name="bUpdateTime" Type="datetime2" Precision="0" />
+        </EntityType>
+        <EntityType Name="tOrder">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fOrderGuid" Type="nvarchar" MaxLength="50" />
+          <Property Name="fUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="fReceiver" Type="nvarchar" MaxLength="50" />
+          <Property Name="fEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="fAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="fDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tOrderDetail">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fOrderGuid" Type="nvarchar" MaxLength="50" />
+          <Property Name="fUserId" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPId" Type="nvarchar" MaxLength="50" />
+          <Property Name="fName" Type="nvarchar" MaxLength="50" />
+          <Property Name="fPrice" Type="int" />
+          <Property Name="fQty" Type="int" />
+          <Property Name="fIsApproved" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityContainer Name="dbOrderFoodModelStoreContainer">
+          <EntitySet Name="bEmployee" EntityType="Self.bEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dish" EntityType="Self.Dish" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMember" EntityType="Self.tMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrder" EntityType="Self.tOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrderDetail" EntityType="Self.tOrderDetail" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbOrderFoodModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bEmployee">
+          <Key>
+            <PropertyRef Name="bId" />
+          </Key>
+          <Property Name="bId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bSex" Type="Int32" Nullable="false" />
+          <Property Name="bEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bStatus" Type="Int32" Nullable="false" />
+          <Property Name="bCreateTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="bUpdateTime" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="0" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Dish">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Img" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateTime" Type="DateTime" Precision="0" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Int32" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tMember">
+          <Key>
+            <PropertyRef Name="tId" />
+          </Key>
+          <Property Name="tId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bCreateTime" Type="DateTime" Precision="0" />
+          <Property Name="bUpdateTime" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="tOrder">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fOrderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fReceiver" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tOrderDetail">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fOrderGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fPrice" Type="Int32" />
+          <Property Name="fQty" Type="Int32" />
+          <Property Name="fIsApproved" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="dbOrderFoodEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bEmployee" EntityType="Self.bEmployee" />
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="Dish" EntityType="Self.Dish" />
+          <EntitySet Name="tMember" EntityType="Self.tMember" />
+          <EntitySet Name="tOrder" EntityType="Self.tOrder" />
+          <EntitySet Name="tOrderDetail" EntityType="Self.tOrderDetail" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbOrderFoodModelStoreContainer" CdmEntityContainer="dbOrderFoodEntities">
+          <EntitySetMapping Name="bEmployee">
+            <EntityTypeMapping TypeName="dbOrderFoodModel.bEmployee">
+              <MappingFragment StoreEntitySet="bEmployee">
+                <ScalarProperty Name="bId" ColumnName="bId" />
+                <ScalarProperty Name="bUserId" ColumnName="bUserId" />
+                <ScalarProperty Name="bPwd" ColumnName="bPwd" />
+                <ScalarProperty Name="bName" ColumnName="bName" />
+                <ScalarProperty Name="bSex" ColumnName="bSex" />
+                <ScalarProperty Name="bEmail" ColumnName="bEmail" />
+                <ScalarProperty Name="bStatus" ColumnName="bStatus" />
+                <ScalarProperty Name="bCreateTime" ColumnName="bCreateTime" />
+                <ScalarProperty Name="bUpdateTime" ColumnName="bUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="dbOrderFoodModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dish">
+            <EntityTypeMapping TypeName="dbOrderFoodModel.Dish">
+              <MappingFragment StoreEntitySet="Dish">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMember">
+            <EntityTypeMapping TypeName="dbOrderFoodModel.tMember">
+              <MappingFragment StoreEntitySet="tMember">
+                <ScalarProperty Name="tId" ColumnName="tId" />
+                <ScalarProperty Name="tUserId" ColumnName="tUserId" />
+                <ScalarProperty Name="tPwd" ColumnName="tPwd" />
+                <ScalarProperty Name="tName" ColumnName="tName" />
+                <ScalarProperty Name="tEmail" ColumnName="tEmail" />
+                <ScalarProperty Name="bCreateTime" ColumnName="bCreateTime" />
+                <ScalarProperty Name="bUpdateTime" ColumnName="bUpdateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrder">
+            <EntityTypeMapping TypeName="dbOrderFoodModel.tOrder">
+              <MappingFragment StoreEntitySet="tOrder">
+                <ScalarProperty Name="fId" ColumnName="fId" />
+                <ScalarProperty Name="fOrderGuid" ColumnName="fOrderGuid" />
+                <ScalarProperty Name="fUserId" ColumnName="fUserId" />
+                <ScalarProperty Name="fReceiver" ColumnName="fReceiver" />
+                <ScalarProperty Name="fEmail" ColumnName="fEmail" />
+                <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+                <ScalarProperty Name="fDate" ColumnName="fDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrderDetail">
+            <EntityTypeMapping TypeName="dbOrderFoodModel.tOrderDetail">
+              <MappingFragment StoreEntitySet="tOrderDetail">
+                <ScalarProperty Name="fId" ColumnName="fId" />
+                <ScalarProperty Name="fOrderGuid" ColumnName="fOrderGuid" />
+                <ScalarProperty Name="fUserId" ColumnName="fUserId" />
+                <ScalarProperty Name="fPId" ColumnName="fPId" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="fPrice" ColumnName="fPrice" />
+                <ScalarProperty Name="fQty" ColumnName="fQty" />
+                <ScalarProperty Name="fIsApproved" ColumnName="fIsApproved" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

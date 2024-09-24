@@ -1,0 +1,88 @@
+﻿@model prjAdmin.Models.Dish
+@{
+    ViewBag.Title = "菜品";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+<style>
+    .font-size-large {
+        font-size: 54px; /* 調整字體大小 */
+        font-weight: 800;
+    }
+
+    .font-size-middle {
+        font-size: 30px; /* 調整字體大小 */
+        margin: 10px 0;
+    }
+
+    .font-size-small {
+        font-size: 28px; /* 調整字體大小 */
+        margin: 20px 0;
+    }
+
+
+        .font-size-small span {
+            font-weight: 600;
+        }
+
+    .img-container {
+        width: 100%; /* 設定容器寬度 */
+        height: 100%; /* 設定容器高度 */
+        display: flex;
+        /*align-items: center;*/
+        justify-content: center;
+        overflow: hidden; /* 隱藏超出容器尺寸的部分 */
+    }
+
+        .img-container img {
+            max-width: 100%; /* 設定圖片最大寬度為容器寬度 */
+            max-height: 100%; /* 設定圖片最大高度為容器高度 */
+            object-fit: contain; /* 調整圖片比例以完整顯示在容器內 */
+        }
+</style>
+
+
+<div class="container" style="margin-top: 80px;">
+    <div class="row">
+        <div class="col-md-6" style="height: 70vh;">
+            <div class="img-container">
+                <img src="/Img/product/@Model.Img" class="img-fluid" alt="圖片">
+            </div>
+        </div>
+        <div class="col-md-6" style="height: 70vh;">
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-body font-size-large">
+                            @Model.Name
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body font-size-middle">
+                            @Model.Code
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body font-size-small">
+                            <span>價格:</span> @Model.Sort
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-5">
+                    <div class="card">
+                        <div class="card-body font-size-middle">
+                            <p><a href="@Url.Action("AddCar", "Member")?fPId=@Model.Id" class="btn btn-primary">加入購物車</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

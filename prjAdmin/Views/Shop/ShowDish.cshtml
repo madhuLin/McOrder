@@ -1,0 +1,65 @@
+﻿@model IEnumerable<prjAdmin.Models.Dish>
+@{
+    ViewBag.Title = "產品列表";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+
+<style>
+    .title {
+        margin: 35px auto;
+        font-size: 42px;
+        font-weight: 800;
+    }
+
+    .font-size-large {
+        font-size: 22px; /* 調整字體大小 */
+    }
+</style>
+
+<div class="row mt-5 mb-5 title">
+    <h1 class="text-center display-4">@ViewBag.Name</h1>
+</div>
+
+<div class="row mt-5 mb-5">
+    <div class="col-md-3">
+        <div class="mt-4">
+            <div class="list-group">
+                <ul class="list-unstyled font-size-large">
+                    <li class="p-4">
+                        <a href="@Url.Action("ShowDish", "Shop", new { name = "" })" class="list-group-item">全部</a>
+                    </li>
+
+                    <li class="p-4">
+                    </li>
+
+                    @foreach (var item in ViewBag.Category)
+                    {
+                        <li class="p-4">
+                            <a href="@Url.Action("ShowDish", "Shop", new { name = @item })" class="list-group-item">@item</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="row mt-4">
+
+            @foreach (var item in Model)
+            {
+                <a class="text-decoration-none text-reset" href="@Url.Action("Dishdetails", "Shop", new { Id = item.Id })" style="color:#555">
+                    <div class="col-md-4">
+                        <div class="card rounded-3 mb-4">
+                            <img src="~/Img/product/@item.Img" class="card-img-top" style="width:200px;height:200px;">
+                            <div class="card-body">
+                                <h4 class="card-title">@item.Name</h4>
+                                <p class="card-text">價格：@item.Sort</p>
+                                @*<p><a href="@Url.Action("AddCar", "Member")?fPId=@item.Id" class="btn btn-primary">加入購物車</a></p>*@
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>

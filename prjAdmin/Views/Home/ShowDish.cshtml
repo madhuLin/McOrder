@@ -1,0 +1,131 @@
+﻿@model IEnumerable<prjAdmin.Models.Dish>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+
+@{
+    ViewBag.Title = "編輯菜品";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<style>
+    .img-container {
+        width: 100%; /* 設定容器寬度 */
+        height: 150px; /* 設定容器高度 */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; /* 隱藏超出容器尺寸的部分 */
+    }
+
+        .img-container img {
+            max-width: 100%; /* 設定圖片最大寬度為容器寬度 */
+            max-height: 100%; /* 設定圖片最大高度為容器高度 */
+            object-fit: contain; /* 調整圖片比例以完整顯示在容器內 */
+        }
+</style>
+
+
+@*Begin Page Content*@
+<div class="container-fluid">
+
+    <h1 class="h3 mb-2 text-gray-800">菜品管理</h1>
+
+
+    @*DataTales Example*@
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="display: flex; align-items: center;">
+            <h6 class="m-0 font-weight-bold text-primary" style="flex: 1;">菜品列表</h6>
+            <a href=@Url.Action("CreateDish") class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">新增菜品</span>
+            </a>
+        </div>
+
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Name)</th>
+                            <th>@Html.DisplayNameFor(model => model.Img)</th>
+                            <th>@Html.DisplayNameFor(model => model.CategoryId)</th>
+                            <th>@Html.DisplayNameFor(model => model.Sort)</th>
+                            <th>@Html.DisplayNameFor(model => model.UpdateTime)</th>
+                            <th>    操作   </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr style="height: 180px;">
+                                <td class="bUserId">@item.Name</td>
+                                @*<td class="col-4 col-sm-3">
+                                        <div class="img-container">
+                                            <img src="../Img/product/@item.Img" class="img-fluid" />
+                                        </div>
+                                    </td>*@
+                                <td class="col-4 col-sm-3">
+                                    <div class="img-container">
+                                        <img src="../Img/product/@item.Img" class="img-fluid" />
+                                    </div>
+                                </td>
+
+                                <td>
+                                    @{
+                                        var str = ViewBag.dic[item.CategoryId];
+                                    }
+                                    @str
+                                </td>
+                                <td>@item.Sort</td>
+                                <td>@item.UpdateTime</td>
+                                <td>
+                                    <a href="@Url.Action("EditDish")?Id=@item.Id" class="btn btn-info btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">編輯</span>
+                                    </a>
+
+                                    <a href="@Url.Action("DeleteDish")?Id=@item.Id" class="btn btn-danger btn-icon-split" name="bDelete" onclick="return confirm('確定要刪除 @item.Name 嗎?');">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                        <span class="text">刪除</span>
+                                    </a>
+
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+                <script>
+                    $(document).ready(function () {
+                        var apiurl = location.href.substring(0, 23) + "Home/";
+
+                        $('#dataTable1').DataTable({
+                            deferRender: true,
+                            language: {
+                                url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/zh-HANT.json',
+                            },
+                        });
+
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

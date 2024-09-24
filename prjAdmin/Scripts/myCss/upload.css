@@ -1,0 +1,26 @@
+﻿.avatar-uploader .el-upload {
+    border: dashed 2px #d8dde3 !important;
+    border-radius: 4px !important;
+    background: #fcfcfc;
+}
+
+.avatar-uploader .avatar-uploader-icon {
+    background: #fcfcfc;
+}
+
+.avatar-uploader .el-icon-plus:before {
+    content: "上传图片" !important;
+    font-size: 12px;
+    color: #000;
+}
+
+
+.el-avatar > img {
+    display: block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.avatar-uploader .avatar-uploader-icon {
+    background: #fcfcfc;
+}

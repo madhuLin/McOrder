@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "訂單明細";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<prjAdmin.Models.tOrder>
+
+@*<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">*@
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+@*Begin Page Content*@
+<div class="container-fluid">
+
+    <h1 class="h3 mb-2 text-gray-800">查看訂單</h1>
+
+
+    @*DataTales Example*@
+    <div class="card shadow mb-4">
+        <div class="card-header py-3" style="display: flex; align-items: center;">
+            <h6 class="m-0 font-weight-bold text-primary" style="flex: 1;">分類列表</h6>
+            <a href=@Url.Action("CreateCategory") class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">新增分類</span>
+            </a>
+        </div>
+
+
+        <div class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.fOrderGuid)</th>
+                            <th>@Html.DisplayNameFor(model => model.fUserId)</th>
+                            <th>@Html.DisplayNameFor(model => model.Price)</th>
+                            <th>@Html.DisplayNameFor(model => model.fReceiver)</th>
+                            <th>@Html.DisplayNameFor(model => model.fAddress)</th>
+                            <th>@Html.DisplayNameFor(model => model.fDate)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td class="bUserId">@item.fOrderGuid</td>
+                            <td>@item.fUserId</td>
+                            <td>@item.Price</td>
+                            <td>@item.fReceiver</td>
+                            <td>@item.fAddress</td>
+                            <td>@item.fDate</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+                <script>
+                    $(document).ready(function () {
+                        var apiurl = location.href.substring(0, 23) + "Home/";
+
+                        $('#dataTable1').DataTable({
+                            deferRender: true,
+                            language: {
+                                url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/zh-HANT.json',
+                            },
+                        });
+
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+

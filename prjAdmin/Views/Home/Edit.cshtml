@@ -1,0 +1,103 @@
+﻿
+@using System.Web.Mvc.Ajax
+@*@using System.Web.Mvc.Html*@
+@model prjAdmin.Models.bEmployee
+
+@{
+    ViewBag.Title = "編輯個人資料";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container my-5">
+    <h2 class="mb-4">編輯個人資料</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.bId)
+
+        <div class="card p-4">
+            <div class="row mb-3">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.bUserId, htmlAttributes: new { @class = "form-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.bUserId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.bUserId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.bPwd, htmlAttributes: new { @class = "form-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.bPwd, new { htmlAttributes = new { @class = "form-control", type = "text" } })
+                    @Html.ValidationMessageFor(model => model.bPwd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.bName, htmlAttributes: new { @class = "form-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.bName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.bName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.bSex, htmlAttributes: new { @class = "form-label" })
+                </div>
+                <div class="col-md-10">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label me-4">
+                            @Html.RadioButtonFor(model => model.bSex, 1, new { @class = "form-check-input" })男
+                        </label>
+                        <label class="form-check-label me-4">
+                            @Html.RadioButtonFor(model => model.bSex, 0, new { @class = "form-check-input" })女
+                        </label>
+                        <label class="form-check-label me-4">
+                            @Html.RadioButtonFor(model => model.bSex, -1, new { @class = "form-check-input" })未知
+                        </label>
+                        @Html.ValidationMessageFor(model => model.bSex, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-2">
+                    @Html.LabelFor(model => model.bEmail, htmlAttributes: new { @class = "form-label" })
+                </div>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.bEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.bEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="儲存" class="btn btn-warning" />
+                    <a href=@Url.Action("ShowEmplooyee") class="btn btn-secondary mx-2">
+                        <i class="fas fa-arrow-left"></i> 返回
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

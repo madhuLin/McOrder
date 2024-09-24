@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "麥噹噹首頁";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+
+<style>
+    .custom-container {
+        width: 100%;
+        /*max-width: 1400px;*/ /* 可以根據需要自訂最大寬度 */
+        margin: 60px auto; /* 水平置中 */
+        /*background-color: #f1f1f1;*/ /* 背景顏色示範，可以自行更改 */
+    }
+
+    .centered-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .slideshow {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        overflow: hidden;
+    }
+
+    .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+</style>
+
+
+<div class="row">
+    <div class="custom-container">
+        <div class="slideshow">
+            <a class="slide active">
+                <img src="~/Img/Carousel/0504cm2336x1040.jpg" class="centered-img" alt="Image 1">
+            </a>
+            <a class="slide">
+                <img src="~/Img/Carousel/1207signature2336x1040.jpg" alt="Image 2" class="centered-img">
+            </a>
+            <a class="slide">
+                <img src="~/Img/Carousel/Colombia0411大首頁輪播_2336x1040.png" alt="Image 3" class="centered-img">
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    var slides = document.querySelectorAll('.slide');
+    var currentSlide = 0;
+    var slideInterval = setInterval(nextSlide, 4000);
+
+    function nextSlide() {
+        slides[currentSlide].className = 'slide';
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].className = 'slide active';
+    }
+</script>
+
